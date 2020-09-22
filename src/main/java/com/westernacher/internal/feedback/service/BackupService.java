@@ -61,9 +61,9 @@ public class BackupService {
     String password;
 
     @Scheduled(cron = "${backup.cron.expression}")
-    public void sendAppraisalDatabase() {
+    public void sendAppraisalDatabase(String cycleId) {
         List<Person> personList = personRepository.findAll();
-        List<Appraisal> appraisalList = appraisalRepository.findAll();
+        List<Appraisal> appraisalList = cycleId == null ? appraisalRepository.findAll() : appraisalRepository.findAllByCycleId(cycleId);
         List<AppraisalCycle> cycleList = cycleRepository.findAll();
         List<GoalDefinition> goalDefinitionList = goalDefinitionRepository.findAll();
         List<RatingScale> ratingScaleList = ratingScaleRepository.findAll();

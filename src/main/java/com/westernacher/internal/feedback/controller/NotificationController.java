@@ -150,9 +150,14 @@ public class NotificationController {
         }
     }
 
+    @RequestMapping(value = "/backup/{cycleId}", method = RequestMethod.GET)
+    public void backup (@PathVariable("cycleId") String cycleId) {
+        backupService.sendAppraisalDatabase(cycleId);
+    }
+
     @RequestMapping(value = "/backup", method = RequestMethod.GET)
     public void backup () {
-        backupService.sendAppraisalDatabase();
+        backupService.sendAppraisalDatabase(null);
     }
 
     @Data
